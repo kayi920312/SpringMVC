@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ki.province.dao.ProvinceInfoDao">
+
+	<!-- 省份信息 映射 -->
+	<resultMap type="provinceInfo" id="provinceMap">
+		<id column="id" property="id" />
+		<result column="provinceid" property="provinceid" />
+		<result column="province" property="province" />
+	</resultMap>
+
+	<!-- 省份，包含其城市信息 映射 -->
+	<resultMap type="provinceInfo" id="provinceWithCitiesMap">
+		<id column="provinceid" property="provinceid" />
+		<result column="id" property="id" />
+		<result column="province" property="province" />
+		<collection property="cities" ofType="cityInfo">
+			<id column="city_id" property="id" />
+			<result column="provinceids" property="father" />
+			<result column="cityid" property="cityid" />
+			<result column="city" property="city" />
+		</collection>
+	</resultMap>
+	
+	<!-- 参数查询省份信息 -->
+	<select id="queryProvincesByParam" parameterType="map" resultMap="provinceMap">
+		select * from tab_province
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 参数查询省份，包含其城市信息 -->
+	<select id="queryProvincesWithCitiesByParam" parameterType="map" resultMap="provinceWithCitiesMap">
+		select 
+			tp.id,
+			tp.province,
+			tp.provinceid,
+			tc.id as city_id,
+			tc.city,
+			tc.father as provinceids,
+			tc.cityid
+		from tab_province tp 
+		left join tab_city tc on tp.provinceid = tc.father
+		<where>
+			<if test="id != null">
+				tp.id = #{id}
+			</if>
+		</where>
+	</select>
+</mapper>

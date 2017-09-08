@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"  
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
+    <context:component-scan base-package="com.ki.**" /> 
+    
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/jsp/" />
+      <property name="suffix" value=".jsp" />
+   </bean>
+   
+	<!-- 导入配置文件 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<array>
+				<value>classpath:conf/properties/conf.properties</value>
+			</array>
+		</property>
+	</bean>  
+     
+    <!-- 数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"  
+        destroy-method="close">  
+        <property name="driverClass" value="${dbProp.driverClass_MySql}" />  
+        <property name="jdbcUrl" value="${dbProp.jdbcUrl_MySql}" />  
+        <property name="user" value="${dbProp.username_MySql}" />  
+        <property name="password" value="${dbProp.password_MySql}" />  
+        <property name="initialPoolSize" value="${dbProp.initialPoolSize_MySql}" />  
+        <property name="maxPoolSize" value="${dbProp.maxPoolSize_MySql}" />  
+        <property name="minPoolSize" value="${dbProp.minPoolSize_MySql}" />  
+        <property name="acquireIncrement" value="${dbProp.acquireIncrement_MySql}" /> <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="maxIdleTime" value="${dbProp.maxIdleTime_MySql}" /> <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+        <property name="idleConnectionTestPeriod" value="${dbProp.idleConnectionTestPeriod_MySql}" /> <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+        <property name="preferredTestQuery" value="select now()"></property><!--定义所有连接测试都执行的测试语句 -->
+    </bean>
+	
+	<!-- Mybatis 的 session factory 配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:conf/mybatis/mybatisConfig.xml" />
+		<property name="mapperLocations" value="classpath*:conf/mybatis/mapper/**/*.xml" />
+<!-- 		<property name="typeAliasesPackage" value="com.ssm.web" /> -->
+	</bean>
+	
+	 <!-- 扫描  mapper 接口 -->  
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="com.ki.**.dao" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  
+    </bean>  
+    
+    <!-- 事务管理 -->  
+     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <!-- 用于Mybatis 的事务配置 -->    
+        <property name="dataSource" ref="dataSource"/>  
+    </bean>    
+      
+    <!-- 注解形式的transaction管理 -->  
+    <tx:annotation-driven transaction-manager="transactionManager"/>  
+    
+</beans>
