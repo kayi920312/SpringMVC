@@ -49,7 +49,7 @@
    </bean>
 
 	<!-- 日期转换 -->
-	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+	<!-- <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
 		<property name="converters">
 			<set>
 				<bean class="com.ki.base.StringToDateConverter">
@@ -57,7 +57,18 @@
 				</bean>
 			</set>
 		</property>
+	</bean> -->
+	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<bean class="com.ki.base.DateFormatter">
+					<constructor-arg type="java.lang.String" value="MM-dd-yyyy" />
+				</bean>
+			</set>
+		</property>
 	</bean>
+	
    
    
 	<!-- 导入配置文件 -->
