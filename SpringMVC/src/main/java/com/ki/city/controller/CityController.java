@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,8 @@ import util.GsonUtil;
 
 @Controller
 public class CityController {
+	
+	private static final Logger loger = Logger.getLogger(CityController.class);
 	
 	@Resource(name="cityInfoServiceImpl")
 	private CityInfoService cityInfoService;
@@ -43,7 +46,7 @@ public class CityController {
 	@RequestMapping(value="/city")
 	@ResponseBody
     public String getCityByParam(HttpServletRequest request, Model model) {
-		
+		loger.info("getCityByParam");
 		String cityId = request.getParameter("cityId");
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("cityId", cityId);

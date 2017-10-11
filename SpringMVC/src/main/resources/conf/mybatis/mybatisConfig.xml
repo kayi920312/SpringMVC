@@ -5,9 +5,14 @@
 
 <configuration>
 
+    <settings>    
+        <setting name="logImpl" value="LOG4J" />      
+    </settings>    
+
 	<typeAliases>
 		<typeAlias type="com.ki.city.model.CityInfo" alias="cityInfo" />
 		<typeAlias type="com.ki.province.model.ProvinceInfo" alias="provinceInfo" />
 	</typeAliases>
 	
+
 </configuration>
