@@ -15,7 +15,6 @@ public class StringToDateConverter implements Converter<String, Date> {
 	
 	public Date convert(String s) {
 		try{
-			System.out.println("开始转换日期");
 			SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
 			dateFormat.setLenient(false);
 			return dateFormat.parse(s);

@@ -15,7 +15,7 @@ public class DateFormatter implements Formatter<Date>{
 	public DateFormatter(String datePattern){
 		this.datePattern = datePattern;
 		simpleDateFormat = new SimpleDateFormat(this.datePattern);
-		simpleDateFormat.setLenient(false);
+		simpleDateFormat.setLenient(false);	//true则不太严格，false则严格: 宽松的，仁慈的
 	}
 	
 	// Date to String
@@ -26,10 +26,9 @@ public class DateFormatter implements Formatter<Date>{
 	//String to Date
 	public Date parse(String text, Locale locale) throws ParseException {
 		try{
-			System.out.println("开始转换日期");
-			return simpleDateFormat.parse(text);
+			return simpleDateFormat.parse(text); 
 		}catch(ParseException e){
-			System.out.println("时间格式转换失败。。。");
+			System.out.println("时间格式转换失败: "+e.toString());
 			throw new IllegalArgumentException("时间格式转换失败");
 		}
 	}
