@@ -25,7 +25,7 @@
 	
 	<!-- 参数查询城市信息 -->
 	<select id="queryCitiesByParam" resultMap="cityMap" parameterType="map">
-		select * from tab_city
+		select * from TAB_CITY
 		<where>
 			<if test="id != null">
 				id=#{id}
@@ -43,8 +43,8 @@
 			tp.provinceid as father,
 			tp.id as province_id,
 			tp.province
-		from tab_city tc 
-		left join tab_province tp on tc.father = tp.provinceid
+		from TAB_CITY tc 
+		left join TAB_PROVINCE tp on tc.father = tp.provinceid
 		<where>
 			<if test="id != null">
 				tc.id=#{id}
