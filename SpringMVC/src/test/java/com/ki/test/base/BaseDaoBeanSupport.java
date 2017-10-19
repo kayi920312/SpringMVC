@@ -5,7 +5,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BaseDaoBeanSupport {
 	
-	ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring/applicationContext.xml");
+	ApplicationContext ac = null;
+	
+	public BaseDaoBeanSupport(){
+		ac = new ClassPathXmlApplicationContext("/conf/spring/applicationContext.xml");
+//		ac = new FileSystemXmlApplicationContext("conf/spring/applicationContext.xml");
+	}
 	
 	public Object getBean(String beanName){
 		return ac.getBean(beanName);

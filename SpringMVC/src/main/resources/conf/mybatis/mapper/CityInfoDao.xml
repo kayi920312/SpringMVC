@@ -5,6 +5,10 @@
 
 <mapper namespace="com.ki.city.dao.CityInfoDao">
 
+	<!-- 开启二级自定义缓存 -->
+	<cache type="com.ki.base.MyBatisCahe" />
+	<!-- <cache/> -->
+	
 	<!-- 城市信息 映射 -->
 	<resultMap type="cityInfo" id="cityMap">
 		<id column="id" property="id" />
@@ -31,6 +35,14 @@
 				id=#{id}
 			</if>
 		</where>
+		<!-- <trim prefix="where" prefixOverrides="and |or ">   空格不能省略
+			<if test="id != null">
+				and id=#{id}
+			</if>
+			<if test="cityid != null">
+				and cityid=#{cityid}
+			</if>
+		</trim> -->
 	</select>
 	
 	<!-- 参数查询城市，包含其所属省份信息 -->

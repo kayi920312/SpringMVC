@@ -25,6 +25,7 @@ import com.ki.city.service.CityInfoService;
 import util.GsonUtil;
 
 @Controller
+@RequestMapping(value="/city")
 public class CityController {
 	
 	private static final Logger loger = Logger.getLogger(CityController.class);
@@ -43,7 +44,7 @@ public class CityController {
 	 * @param cityName
 	 * @return
 	 */
-	@RequestMapping(value="/city")
+	@RequestMapping(value="/getCityByParam")
 	@ResponseBody
     public String getCityByParam(HttpServletRequest request, Model model) {
 		loger.info("getCityByParam");
@@ -51,6 +52,7 @@ public class CityController {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("cityId", cityId);
 		List<CityInfo> list = cityInfoService.queryCitiesWithProvinceByParam(param);
+		cityInfoService.queryCitiesWithProvinceByParam(param);
         return GsonUtil.toJson(list);
     }
 	
@@ -61,7 +63,7 @@ public class CityController {
 	}
 	
 	/*上传图片*/
-	@RequestMapping(value="/city/pic")
+	@RequestMapping(value="/uploadPic")
 	public void uploadPic(MultipartFile file){
 		if(file!=null&&!file.isEmpty()){
 			
@@ -106,7 +108,7 @@ public class CityController {
 		}
 	}
 	
-	@RequestMapping(value="/city/pic2")
+	@RequestMapping(value="/uploadPic2")
 	@ResponseBody
 	public String uploadPic2(MultipartFile file){
 		Map<String, String> result = new HashMap<String, String>();
@@ -133,7 +135,7 @@ public class CityController {
 	 * 方法执行完后
 	 * spring默认跳转到 @RequestMapping 的 value 值 /city/pic3.jsp
 	 * 这时候会报 404 的错误 */
-	@RequestMapping(value="/city/pic3")
+	@RequestMapping(value="/uploadPic3")
 	public void uploadPic3(MultipartFile file){
 		Map<String, String> result = new HashMap<String, String>();
 		if(file!=null&&!file.isEmpty()){
