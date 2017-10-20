@@ -11,6 +11,12 @@
 		<param-value>classpath:/conf/properties/log4j.properties</param-value>
 	</context-param>
 	
+	<!-- Spring配置文件 -->
+	<context-param>
+	  <param-name>contextConfigLocation</param-name>
+	  <param-value>classpath:/conf/spring/applicationContext.xml</param-value>
+	</context-param>
+	
     <!-- 字符集过滤器 -->  
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -30,6 +36,16 @@
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
 	
+	<!-- 启用Spring监听器 -->
+	<listener>
+	  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 防止Spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
 	<!-- spring mvc 配置 -->
     <!-- 配置DispatcherServlet表示，该工程将采用springmvc的方式。启动时也会默认在/WEB-INF目录下查找XXX-servlet.xml作为配置文件，
         XXX就是DispatcherServlet的名字，该文件中将配置两项重要的mvc特性：HandlerMapping,负责为DispatcherServlet这个前端控制器的请求查找Controller；
@@ -40,7 +56,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>  
             <param-name>contextConfigLocation</param-name>  
-            <param-value>classpath:conf/spring/applicationContext.xml</param-value>
+            <param-value>classpath:conf/spring/spirng-servlet.xml</param-value>
         </init-param>  
         <load-on-startup>1</load-on-startup>  
     </servlet>

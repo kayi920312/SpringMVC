@@ -9,7 +9,6 @@ public class BaseDaoBeanSupport {
 	
 	public BaseDaoBeanSupport(){
 		ac = new ClassPathXmlApplicationContext("/conf/spring/applicationContext.xml");
-//		ac = new FileSystemXmlApplicationContext("conf/spring/applicationContext.xml");
 	}
 	
 	public Object getBean(String beanName){
