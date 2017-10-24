@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +54,6 @@ public class CityController {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("cityId", cityId);
 		List<CityInfo> list = cityInfoService.queryCitiesWithProvinceByParam(param);
-		cityInfoService.queryCitiesWithProvinceByParam(param);
         return GsonUtil.toJson(list);
     }
 	

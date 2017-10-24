@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ki.user.dao.CertTypeDao">
+
+	<!-- 开启二级自定义缓存 -->
+	<!-- <cache type="com.ki.base.MyBatisCahe" /> -->
+	<!-- <cache/> -->
+	
+	<!-- 证件类型 映射 -->
+	<resultMap type="certType" id="certTypeMap">
+		<id column="id" property="id" />
+		<result column="content" property="content" />
+	</resultMap>
+
+	<!-- 参数查询 -->
+	<select id="queryCertTypeByParam" parameterType="map" resultMap="certTypeMap">
+		select id, content from tab_certtype
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+			<if test="content != null">
+				content = #{content}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 插入新的旅客类型信息 -->
+	<insert id="addNewCertType" parameterType="certType" useGeneratedKeys="true" keyProperty="id">
+		insert into tab_certtype( content )
+		values( #{content, jdbcType=VARCHAR} )
+	</insert>
+	
+</mapper>

@@ -2,9 +2,11 @@ package com.ki.city.model;
 
 import java.io.Serializable;
 
+import org.apache.ibatis.type.Alias;
+
 import com.ki.province.model.ProvinceInfo;
 
-//@Alias("cityInfo")
+@Alias("cityInfo")
 public class CityInfo implements Serializable{
 
 	private static final long serialVersionUID = 1L;

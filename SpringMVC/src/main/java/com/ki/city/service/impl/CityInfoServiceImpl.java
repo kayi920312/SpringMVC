@@ -46,4 +46,5 @@ public class CityInfoServiceImpl implements CityInfoService {
 		return cities;
 	}
 
+	
 }

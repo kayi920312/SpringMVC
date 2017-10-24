@@ -6,7 +6,7 @@
 <mapper namespace="com.ki.city.dao.CityInfoDao">
 
 	<!-- 开启二级自定义缓存 -->
-	<cache type="com.ki.base.MyBatisCahe" />
+	<!-- <cache type="com.ki.base.MyBatisCahe" /> -->
 	<!-- <cache/> -->
 	
 	<!-- 城市信息 映射 -->

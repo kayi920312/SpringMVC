@@ -48,8 +48,8 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:conf/mybatis/mybatisConfig.xml" />
-		<property name="mapperLocations" value="classpath*:conf/mybatis/mapper/**/*.xml" />
-<!-- 		<property name="typeAliasesPackage" value="com.ssm.web" /> -->
+		<property name="mapperLocations" value="classpath:conf/mybatis/mapper/**/*.xml" />
+		<property name="typeAliasesPackage" value="com.ki" />
 	</bean>
 	
 	 <!-- 扫描  mapper 接口 -->  
