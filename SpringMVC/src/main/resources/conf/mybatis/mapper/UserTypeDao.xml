@@ -6,7 +6,7 @@
 <mapper namespace="com.ki.user.dao.UserTypeDao">
 
 	<!-- 开启二级自定义缓存 -->
-	<!-- <cache type="com.ki.base.MyBatisCahe" /> -->
+	<!-- <cache type="com.ki.util.MyBatisCahe" /> -->
 	<!-- <cache/> -->
 	
 	<!-- 旅客类型 映射 -->

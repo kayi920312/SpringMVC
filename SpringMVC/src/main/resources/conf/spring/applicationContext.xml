@@ -65,6 +65,12 @@
     </bean>    
       
     <!-- 注解形式的transaction管理 -->  
-    <tx:annotation-driven transaction-manager="transactionManager"/>  
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+	<!-- 使用ehcache缓存  -->
+	<!-- ehcache在2.5以后，CacheManager使用了Singleton，这样在创建多个CacheManager时就会产生错误 -->
+	<!-- <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:conf/nosql/ehcache/ehcache.xml" />
+	</bean> -->
     
 </beans>

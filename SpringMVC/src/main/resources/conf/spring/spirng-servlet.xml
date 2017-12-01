@@ -42,6 +42,7 @@
     
     <!-- 元素指示哪些静态资源需要单独处理，不通过dispatcher servlet -->
     <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
     
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="prefix" value="/WEB-INF/jsp/" />

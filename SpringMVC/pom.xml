@@ -228,6 +228,19 @@
 		</dependency>
 		<!-- common end -->
 		
+		<!-- ehcache start -->
+		<dependency>
+		    <groupId>org.mybatis.caches</groupId>
+		    <artifactId>mybatis-ehcache</artifactId>
+		    <version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.8</version>
+		</dependency>
+		<!-- ehcache end -->
+		
   </dependencies>
   
   <build>

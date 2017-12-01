@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +47,6 @@ public class CityController {
 	@RequestMapping(value="/getCityByParam")
 	@ResponseBody
     public String getCityByParam(HttpServletRequest request, Model model) {
-		loger.info("getCityByParam");
 		String cityId = request.getParameter("cityId");
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("cityId", cityId);

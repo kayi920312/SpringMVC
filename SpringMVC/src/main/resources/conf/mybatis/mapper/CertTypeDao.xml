@@ -6,8 +6,15 @@
 <mapper namespace="com.ki.user.dao.CertTypeDao">
 
 	<!-- 开启二级自定义缓存 -->
-	<!-- <cache type="com.ki.base.MyBatisCahe" /> -->
+	<!-- <cache type="com.ki.util.MyBatisCahe" /> -->
 	<!-- <cache/> -->
+	
+	<!-- 开启二级 ehcache 缓存 -->
+	<!-- 可以输出日志 -->
+	<!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />    -->
+	 <!-- 不输出日志 -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>  -->    
+	
 	
 	<!-- 证件类型 映射 -->
 	<resultMap type="certType" id="certTypeMap">
