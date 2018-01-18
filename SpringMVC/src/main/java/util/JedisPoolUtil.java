@@ -36,7 +36,7 @@ public class JedisPoolUtil {
 		            poolConfig.setMaxWaitMillis(1000*10);
 		            poolConfig.setTestOnBorrow(true);
 		            
-					jedisPool = new JedisPool(poolConfig, properties.getProperty("jedisIp"));
+					jedisPool = new JedisPool(poolConfig, properties.getProperty("jedisIp"), Integer.parseInt(properties.getProperty("jedisPort")));
 					
 					return jedisPool;
 				}else{

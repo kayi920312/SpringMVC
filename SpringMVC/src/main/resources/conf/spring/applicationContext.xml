@@ -73,4 +73,38 @@
 		<property name="configLocation" value="classpath:conf/nosql/ehcache/ehcache.xml" />
 	</bean> -->
     
+    <!-- spring-data-redis -->
+    
+    <!-- JedisPoolConfig -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">    
+    	 <property name="maxTotal" value="${redis.maxTotal}" />
+         <property name="maxIdle" value="${redis.maxIdle}" />     
+         <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />    
+         <property name="testOnBorrow" value="${redis.testOnBorrow}" />    
+     </bean>
+     
+     <!-- RedisSentinelConfiguration 哨兵 -->
+     <!-- <bean id="sentinelConfig" class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+		<constructor-arg name="master" value="mymaster" />
+		<constructor-arg name="sentinels">
+			<set>
+				<value>192.168.88.153:26379</value>
+				<value>192.168.88.153:26380</value>
+				<value>192.168.88.153:26382</value>
+			</set>
+		</constructor-arg>
+	</bean> -->
+       
+    <!-- Jedis ConnectionFactory -->
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" 
+	 	p:host-name="${redis.ip}" p:port="${redis.port}" p:pool-config-ref="poolConfig">
+	 	<!-- <constructor-arg ref="sentinelConfig" /> -->
+	 </bean>
+	 
+	<!-- redis template definition -->
+  	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate" p:connection-factory-ref="jedisConnectionFactory"/> -->
+  	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="jedisConnectionFactory"/>
+  	
+    <!-- spring-data-redis -->
+    
 </beans>
