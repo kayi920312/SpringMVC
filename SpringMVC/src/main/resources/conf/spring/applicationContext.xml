@@ -102,8 +102,8 @@
 	 </bean>
 	 
 	<!-- redis template definition -->
-  	<!-- <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate" p:connection-factory-ref="jedisConnectionFactory"/> -->
   	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" p:connection-factory-ref="jedisConnectionFactory"/>
+  	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate" p:connection-factory-ref="jedisConnectionFactory"/>
   	
     <!-- spring-data-redis -->
     
